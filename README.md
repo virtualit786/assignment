@@ -8,7 +8,9 @@ Simplest MERN application, with client in ReactJS and CLI app in simple nodejs c
 I have used mostly gitflow process on projects that allow it, but due to shortage of time, did not opted for this small assignemnt. 
 
 ## Docker 
-The application is dockerized and to run the application (react client, nodejs api server, postgresql database and mail server mailcatcher), from the root folder, run 
+The application is dockerized. Env variables are defined in docker-compose.yml file. Better solution would have been to use dotenv. 
+Docker is currently setup for dev mode only. Better solution would have been to define the environment bassed docker-compose.
+To run the application (react client, nodejs api server, postgresql database and mail server mailcatcher), from the root folder, run 
 
 ```
 docker-compose up
@@ -19,7 +21,7 @@ This builds and launches the three docker containers.
 - Database postgresql
 - Mail server mailcatcher accessible @ `http://localhost:1080`
 - NodeJS graphql api server accessible @ `http://localhost:4000/graphql`
-- React client accessible @ `http://localhost:3000/
+- React client accessible @ `http://localhost:3000/`
 
 
 ## CLI Application 
