@@ -1,0 +1,30 @@
+type Subscriptions {
+  id: ID
+  email: String
+  is_email_sent: Boolean
+}
+type Error {
+  message: String!
+}
+type SubscriptionResult {
+  ok: Boolean!
+  subscription: Subscriptions
+  error: Error
+}
+
+type SubscriptionEmailProcessResult {
+  ok: Boolean!
+  successfull: Int!
+  failed: Int!
+  error: Error
+}
+
+type Query {
+  processedSubscriptions: [Subscriptions]!
+  unprocessedSubscriptions: [Subscriptions]!
+}
+
+type Mutation {
+  subscribe(email: String!): SubscriptionResult
+  sendSubscriptionEmails: SubscriptionEmailProcessResult
+}
