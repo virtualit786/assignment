@@ -1,5 +1,7 @@
 import { models } from "../../../models/index.js";
 import { mailSender } from "../../../utils";
+import pubsub from "../../pubsub";
+import { SUBSCRIPTION_PROCESSED } from "./subscriptions";
 export default {
   async subscribe(obj, { email }) {
     const { Subscriptions } = models;
@@ -52,6 +54,9 @@ export default {
           if (promiseResult.rejected.length) failedMailsCount++;
         });
         await markSubscriptionProcessedEmails(successfull, Subscriptions);
+        pubsub.publish(SUBSCRIPTION_PROCESSED, {
+          subscriptionProcessed: successfull,
+        });
         return {
           ok: true,
           successfull: successfull.length,
