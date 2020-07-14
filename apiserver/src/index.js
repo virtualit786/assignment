@@ -23,6 +23,7 @@ app.use(
 const server = http.createServer(app);
 
 apolloServer.applyMiddleware({ app, path: "/graphql" });
+apolloServer.installSubscriptionHandlers(server);
 
 server.listen(port, () => {
   console.log("Server started!");

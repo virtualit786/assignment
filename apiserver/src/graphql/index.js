@@ -4,6 +4,7 @@ import { join } from "path";
 import { loadSchemaSync } from "@graphql-tools/load";
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { addResolversToSchema } from "@graphql-tools/schema";
+
 import resolvers from "./subscriptions/index";
 
 // Load schema from the graphql files
@@ -21,6 +22,21 @@ const apolloServer = new ApolloServer({
   schema: schemaWithResolvers,
   introspection: true,
   validationRules: [depthLimit(7)],
+  subscriptions: {
+    onConnect: (connectionParams) => {
+      console.log(
+        "subscriptions-> onConnect connectionParams ",
+        connectionParams
+      );
+    },
+    onDisconnect: (webSocket, context) => {
+      console.log(
+        "subscriptions-> onDisconnect context ",
+        context
+      );
+    },
+  },
+
   formatError: (err) => {
     if (err.message.startsWith("Database Error: ")) {
       return new Error("Internal server error");

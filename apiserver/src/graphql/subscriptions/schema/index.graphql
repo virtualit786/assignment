@@ -1,3 +1,7 @@
+type Subscription {
+  subscriptionProcessed: [String!]!
+}
+
 type Subscriptions {
   id: ID
   email: String
